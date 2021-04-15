@@ -1,0 +1,32 @@
+Understanding File Systems and Paths
+Understanding File Systems and Paths
+A file is a collection of data stored as a single unit on a storage device such as a disk drive. On computers, files are usually organized in a file system. In most file systems, groups of related files are stored in a directory (also called a folder when used with a graphical interface). These file systems then allow hierarchies of directories where directories may contained both files and directories. Typically, the entire directory structure for one drive lies a single directory (the root directory) that contains all of the files and directories for that drive.
+
+When working with directories, there are several common terms that we will use. The parent of a directory CC is simply the directory that directly contains CC. (Note that the root directory has no parent.) If PP is the parent directory of another directory CC, the CC is referred to as a sub-directory of PP. (CC is also sometimes referred to as a child directory of PP.)
+
+Absolute paths
+When working with files, one fundamental task is to specify the unique location of a file in the file system. In Python, the location is specified as string known as a path. For example, using the Windows File Explorer, you can extract the path of a specific file by holding down the shift key and right clicking on the desired file, and selecting "Copy as path" from the pull-down menu. Here is a typical example of the path to the Dropbox directory on my work computer: \verb|"C:\Users\jwarren\Dropbox"|"C:\Users\jwarren\Dropbox".
+
+This path consist of a string whose first two characters \verb|"C:"|"C:" denote which drive contains the directory. The rest of the path consists of directory names separated by backslashes \verb|"\"|"\". The \verb|"\Users"|"\Users" part of the path indicates that my Dropbox directory lies in the \verb|"Users"|"Users" sub-directory of the root directory. The \verb|"\jwarren"|"\jwarren" portion of the path indicates that my Dropbox directory lies in the \verb|"jwarren"|"jwarren" sub-directory of the \verb|"Users"|"Users" directory. The final \verb|"\Dropbox"|"\Dropbox" portion of the string indices that the \verb|"Dropbox"|"Dropbox" directory is a sub-directory of the \verb|"jwarren"|"jwarren" directory.
+
+For Mac OS, such a path would have a form similar to something like \verb|"/Users/jwarren/Dropbox/Python Scripting"|"/Users/jwarren/Dropbox/Python Scripting". The two key differences are that paths for Mac OS use slash \verb|"/"|"/" in place of backslash \verb|"\"|"\" and all files lie in a single root directory. (There are no separate logical drives).
+
+Relative paths
+While it is always possible to specify the location of a file or directory via an absolute path, this approach is not always recommended. An alternative approach is to specify the location of the desired file relative to some existing location in the file system. By default, Python maintains a working directory that it uses as the base location for all relative paths. In a GUI-based IDEs such as Thonny, IDLE or Atom, the working directory is usually the directory that contains the Python source code being run.
+
+Based on this working directory, here are a couple of examples of relative paths:
+
+\verb|"current_file.ext"|"current_file.ext" - relative path to the file of the same name in the current working directory.
+\verb|"child/child_file.ext"|"child/child_file.ext" - relative path to the file \verb|"child_file.ext"|"child_file.ext" in the sub-directory \verb|"child"|"child" of the current working directory.
+\verb|"../parent_file.ext"|"../parent_file.ext" - relative path to the file \verb|"parent_file.ext"|"parent_file.ext" in parent directory of the current working directory. Here, \verb|".."|".." denotes the parent directory of the current working directory.
+Note that in these examples, slashes were used in constructing the specified relative paths. While paths typically use backslash in Windows, Python will accepted slashes in place of backslashes on relative paths on Windows.
+
+Using the OS module to manipulate paths
+For many applications, your Python code should work reliably independent of the particular OS for the file systems. In this case, you may wish to considering use the methods from the os module described below to create truly OS-independent Python code for manipulating paths. (Remember to \color{red}{\verb|import os|}import os before using these methods.)
+
+\color{red}{\verb|os.getcwd)()|}os.getcwd)() returns the path to the current working directory for your Python code.
+\color{red}{\verb|os.path.abspath(file_name) |}os.path.abspath(file_name)  returns to the absolute path the specified file.
+\color{red}{\verb|os.path.join(path, dir1, dir2, ..., file_name)|}os.path.join(path, dir1, dir2, ..., file_name) returns the absolute path to the file \color{red}{\verb|file_name|}file_name that lies in the sequence of nested directories \color{red}{\verb|dir1|}dir1, \color{red}{\verb|dir2|}dir2, ..., located at \color{red}{\verb|path|}path.
+\color{red}{\verb|os.pardir|}os.pardir returns the relative path to the parent directory of the current working directory. For most systems, this path is \color{red}{\verb|".."|}".."
+For examples of these methods in action, explore this path manipulation code. Since this code manipulates your file system, the code must be run on your desktop.
+

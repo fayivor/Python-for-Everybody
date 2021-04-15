@@ -1,0 +1,2 @@
+Content of current_file.txt
+"C:\Users\fredr\OneDrive\Desktop\P4E\Python Scripting\Week 4\Paths\Current_file.txt.txt"

@@ -1,0 +1,2 @@
+lecture_notes.txt
+"C:\Users\fredr\OneDrive\Desktop\P4E\Python Scripting\Week 4\Paths\lecture_notes.txt.txt"
